@@ -207,6 +207,18 @@ void Get_State_File_Name(char *name)
 	strcpy(name, State_Dir);
 	_mkdir(name); // added to avoid a crash
 	strcat(name, Rom_Name);
+
+	//Add DateTime to file Save - AtomicRaven - 2016
+	time_t rawtime;
+	struct tm * timeinfo;
+	char buffer [80];
+
+	time (&rawtime);
+	timeinfo = localtime (&rawtime);
+	strftime (buffer,80,"-%Y-%m-%d_%H%M%S",timeinfo);
+	strcat(name, buffer); //add DateTime to Filename
+	//Add DateTime to file Save - AtomicRaven - 2016
+
 	if (UseMovieStates && MainMovie.Status)
 	{
 		strcat(name," - ");
